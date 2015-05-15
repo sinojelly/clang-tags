@@ -1,3 +1,4 @@
 *~
 *.pyo
 .dir-locals.el
+BUILD*
