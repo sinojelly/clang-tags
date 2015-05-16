@@ -123,7 +123,7 @@ target_link_libraries (clang-tags-server ${LIBS})
 
 function (ct_template path)
   configure_file (
-    "${PROJECT_SOURCE_DIR}/${path}"
+    "${PROJECT_SOURCE_DIR}/${path}.in"
     "${PROJECT_BINARY_DIR}/${path}")
 endfunction (ct_template)
 ct_template ("env.sh")
