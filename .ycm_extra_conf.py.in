@@ -54,6 +54,7 @@ flags = [
 '-x',
 'c++'
 '-I.',
+'-I..',
 
 @SYSTEM_HEADERS@
 

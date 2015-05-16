@@ -12,6 +12,7 @@ import time
 import re
 import types
 import tempfile
+import socket
 
 ### Common constants
 logPath    = ".ct.log"
@@ -51,15 +52,8 @@ def endsWithOne (string, suffixes):
             return True
     return False
 
-def sendRequest (request, processOutput=sys.stdout.write):
-    "Send a JSON request to the clang-tags daemon."
-    #TODO: implement this in python rather than calling `socat`
-    request = json.dumps (request)
-
-    if os.getenv ("CLANG_TAGS_TEST") is None:
-        cmd = ["socat", "-", "UNIX-CONNECT:%s" % socketPath]
-    else:
-        cmd = ["clang-tags-server", "--stdin"]
+def sendRequestTest (request, processOutput=sys.stdout.write):
+    cmd = ["clang-tags-server", "--stdin"]
 
     process = subprocess.Popen (cmd,
                                 stdin  = subprocess.PIPE,
@@ -75,6 +69,32 @@ def sendRequest (request, processOutput=sys.stdout.write):
 
     process.wait()
     return process.returncode
+
+def sendRequest (request, processOutput=sys.stdout.write):
+    "Send a JSON request to the clang-tags daemon."
+    request = json.dumps (request)
+
+    if os.getenv ("CLANG_TAGS_TEST"):
+        return sendRequestTest (request, processOutput)
+
+    sock = socket.socket (socket.AF_UNIX, socket.SOCK_STREAM)
+    try:
+        sock.connect (socketPath)
+    except socket.error, msg:
+        print >>sys.stderr, msg
+        return 1
+
+    sock.sendall (request + "\n\n")
+    f = sock.makefile ('r')
+
+    while 1:
+        # Use readline() to avoid buffering problems
+        line = f.readline()
+        if line == "":
+            break
+        processOutput (line)
+
+    return 0
 
 
 
