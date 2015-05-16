@@ -11,7 +11,7 @@ include (CheckFunctionExists)
 include (CheckIncludeFile)
 set (CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 
-add_definitions (-Wall -std=c++11)
+add_definitions (-Wall -std=c++14)
 if ("${CMAKE_BUILD_TYPE}" STREQUAL Release)
   add_definitions (-O3)
 else ("${CMAKE_BUILD_TYPE}" STREQUAL Release)
