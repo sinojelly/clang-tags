@@ -227,23 +227,14 @@ ct_add_test (ct-index
 )
 set_tests_properties (ct-index PROPERTIES DEPENDS ct-load)
 
-ct_add_test (ct-find-def-r
+ct_add_test (ct-find-def
   "cd build"
-  "ct-find-def-r | tee output"
-  "set -x"
-  "grep -q 'main.cxx:15-17' output"
-  "grep -q 'c:@S@MyClass>#d@F@display#' output"
-)
-set_tests_properties (ct-find-def-r PROPERTIES DEPENDS ct-load)
-
-ct_add_test (ct-find-def-i
-  "cd build"
-  "ct-find-def-i | tee output"
+  "ct-find-def | tee output"
   "set -x"
   "grep -q 'main.cxx:21-23' output"
   "grep -q 'c:@S@MyClass>#I@F@display#' output"
 )
-set_tests_properties (ct-find-def-r PROPERTIES DEPENDS ct-index)
+set_tests_properties (ct-find-def PROPERTIES DEPENDS ct-index)
 
 ct_add_test (ct-grep
   "cd build"

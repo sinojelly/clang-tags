@@ -1,3 +1,0 @@
-#!/bin/bash -e
-
-clang-tags find-def -r ../src/main.cxx 849
