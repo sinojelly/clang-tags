@@ -60,7 +60,7 @@ int main (int argc, char **argv) {
     threads.add (boost::ref(watcher));
 #endif
 
-    ClangTags::Server::Server server (cache, indexer);
+    ClangTags::Server::Server server (indexer);
     server.run (fromStdin);
   }
   catch (std::exception& e) {

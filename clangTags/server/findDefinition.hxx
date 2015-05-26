@@ -4,7 +4,6 @@
 #include "request/request.hxx"
 
 #include "clangTags/storage.hxx"
-#include "clangTags/cache.hxx"
 
 #include <string>
 
@@ -24,10 +23,8 @@ public:
   /** @brief Constructor
    *
    * @param storage  @ref Storage instance to look for indexed tags
-   * @param cache    @ref Cache instance storing translation units
    */
-  FindDefinition (Storage & storage,
-                  Cache & cache);
+  FindDefinition (Storage & storage);
 
   void defaults ();
 
@@ -74,20 +71,15 @@ public:
                       std::ostream & cout);
 
 private:
-  void fromIndex_  (std::ostream & cout);
-  void fromSource_ (std::ostream & cout);
-
   struct Args {
     std::string fileName;
     int         offset;
     bool        diagnostics;
     bool        mostSpecific;
-    bool        fromIndex;
   };
   Args args_;
 
   Storage & storage_;
-  Cache & cache_;
 };
 /** @} */
 }

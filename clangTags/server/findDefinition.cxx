@@ -8,11 +8,9 @@
 namespace ClangTags {
 namespace Server {
 
-FindDefinition::FindDefinition (Storage & storage,
-                                Cache & cache)
+FindDefinition::FindDefinition (Storage & storage)
   : Request::CommandParser ("find", "Find the definition of a symbol"),
-    storage_ (storage),
-    cache_   (cache)
+    storage_ (storage)
 {
   prompt_ = "find> ";
   defaults ();
@@ -30,9 +28,6 @@ FindDefinition::FindDefinition (Storage & storage,
   add (key ("diagnostics", args_.diagnostics)
        ->metavar ("true|false")
        ->description ("Print compilation diagnostics"));
-  add (key ("fromIndex", args_.fromIndex)
-       ->metavar ("true|false")
-       ->description ("Search in the index (faster but potentially out-of-date)"));
 }
 
 void FindDefinition::defaults () {
@@ -40,7 +35,6 @@ void FindDefinition::defaults () {
   args_.offset = 0;
   args_.mostSpecific = false;
   args_.diagnostics = true;
-  args_.fromIndex = true;
 }
 
 void FindDefinition::prettyPrint (const ClangTags::Identifier & identifier,
@@ -125,38 +119,7 @@ void FindDefinition::output (LibClang::Cursor cursor,
   output (identifier, cout);
 }
 
-class Finder : public LibClang::Visitor<Finder>
-{
-public:
-  Finder (const LibClang::SourceLocation & targetLocation,
-          std::ostream & cout)
-    : targetLocation_ (targetLocation),
-      cout_ (cout)
-  {}
-
-  CXChildVisitResult visit (LibClang::Cursor cursor,
-                            LibClang::Cursor parent)
-  {
-    const LibClang::SourceLocation location (cursor.location());
-
-    // Skip unexposed cursor kinds
-    if (cursor.isUnexposed()) {
-      return CXChildVisit_Recurse;
-    }
-
-    if (location == targetLocation_) {
-      FindDefinition::output (cursor, cout_);
-    }
-
-    return CXChildVisit_Recurse;
-  }
-
-private:
-  const LibClang::SourceLocation & targetLocation_;
-  std::ostream & cout_;
-};
-
-void FindDefinition::fromIndex_ (std::ostream & cout) {
+void FindDefinition::run (std::ostream & cout) {
   const auto refDefs = storage_.findDefinition (args_.fileName, args_.offset);
   auto refDef = refDefs.begin();
   const auto end = args_.mostSpecific
@@ -164,40 +127,6 @@ void FindDefinition::fromIndex_ (std::ostream & cout) {
     : refDefs.end();
   for ( ; refDef != end ; ++refDef ) {
     output (*refDef, cout);
-  }
-}
-
-void FindDefinition::fromSource_ (std::ostream & cout) {
-  LibClang::TranslationUnit tu = cache_.translationUnit (storage_, args_.fileName);
-
-  // Print clang diagnostics if requested
-  if (args_.diagnostics) {
-    for (unsigned int N = tu.numDiagnostics(),
-           i = 0 ; i < N ; ++i) {
-      cout << tu.diagnostic (i) << std::endl << std::endl;
-    }
-  }
-
-  // Print cursor definition
-  LibClang::Cursor cursor (tu, args_.fileName.c_str(), args_.offset);
-  if (args_.mostSpecific) {
-    output (cursor, cout);
-  }
-  else {
-    LibClang::SourceLocation target = cursor.location();
-    Finder findDef (target, cout);
-    findDef.visitChildren (tu.cursor());
-  }
-}
-
-void FindDefinition::run (std::ostream & cout) {
-  if (args_.fromIndex) {
-    // Request references from the index database
-    fromIndex_ (cout);
-  }
-  else {
-    // Parse the source file and analyse it
-    fromSource_ (cout);
   }
 }
 }

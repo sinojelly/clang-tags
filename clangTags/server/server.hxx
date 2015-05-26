@@ -29,16 +29,11 @@ public:
    * This constructor stores the server @c PID in a pidfile, in order to avoid
    * starting multiple servers for the same project.
    *
-   * @param cache    @ref Cache instance from where translation units can be
-   *                 retrieved
-   *
    * @param indexer  @ref Indexer instance to be used for updating the source
    *                 files index
    */
-  Server (ClangTags::Cache & cache,
-          ClangTags::Indexer::Indexer & indexer)
-    : cache_      (cache),
-      indexer_    (indexer),
+  Server (ClangTags::Indexer::Indexer & indexer)
+    : indexer_    (indexer),
       parser_     ("Clang-tags server\n"),
       pidPath_    (".ct.pid"),
       socketPath_ (".ct.sock")
@@ -51,7 +46,7 @@ public:
       .add (new ClangTags::Server::Load   (storage_, indexer_))
       .add (new ClangTags::Server::Config (storage_))
       .add (new ClangTags::Server::Index  (indexer_))
-      .add (new ClangTags::Server::FindDefinition (storage_, cache_))
+      .add (new ClangTags::Server::FindDefinition (storage_))
       .add (new ClangTags::Server::Grep   (storage_))
       .add (new ClangTags::Server::Exit)
       .prompt ("clang-tags> ");
@@ -102,7 +97,6 @@ public:
   }
 
 private:
-  ClangTags::Cache & cache_;
   ClangTags::Indexer::Indexer & indexer_;
   Storage storage_;
   Request::Parser parser_;

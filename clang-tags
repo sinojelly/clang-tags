@@ -351,8 +351,7 @@ def findDefinition (args):
 
     request = {"command":   "find",
                "file":      fileName,
-               "offset":    args.offset,
-               "fromIndex": args.fromIndex}
+               "offset":    args.offset}
 
     def processOutput (line):
         try:
@@ -571,17 +570,6 @@ def main_argparse ():
         "offset",
         metavar = "OFFSET",
         help = "offset in bytes")
-    s.add_argument (
-        "--index", "-i",
-        dest = "fromIndex",
-        action = "store_true",
-        help = "look for the definition in the index")
-    s.add_argument (
-        "--recompile", "-r",
-        dest = "fromIndex",
-        action = "store_false",
-        help = "recompile the file to find the definition")
-    s.set_defaults (fromIndex = True)
     s.set_defaults (fun = findDefinition)
 
 

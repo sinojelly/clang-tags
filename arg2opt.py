@@ -224,16 +224,6 @@ if __name__ == "__main__":
                                 help = "source file name")
     parserFindDef.add_argument ("offset", metavar = "OFFSET",
                                 help = "offset in bytes")
-    parserFindDef.add_argument ("--index", "-i",
-                                dest = "fromIndex",
-                                action = "store_true",
-                                help = "look for the definition in the index")
-    parserFindDef.add_argument ("--recompile", "-r",
-                                dest = "fromIndex",
-                                action = "store_false",
-                                help =
-                                "recompile the file to find the definition")
-    parserFindDef.set_defaults (fromIndex = True)
     parserFindDef.set_defaults (fun = findDefinition)
 
 
