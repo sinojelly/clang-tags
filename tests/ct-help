@@ -4,7 +4,7 @@ for subcommand in \
     start stop kill clean \
     trace scan fake-compiler \
     add load config index \
-    find-def grep complete \
+    find-def grep \
 ; do
     clang-tags $subcommand --help >${subcommand}-help.out
 done

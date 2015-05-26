@@ -102,7 +102,7 @@ if __name__ == "__main__":
     def start (arg):
         print arg
     update = index = load = scan = trace = clean = kill = stop = start
-    complete = grep = findDefinition = start
+    grep = findDefinition = start
 
     parser = ArgumentParser (
         description = "Index a source code base using libclang.")
@@ -247,20 +247,6 @@ if __name__ == "__main__":
                              metavar = "USR",
                              help = "USR for the definition")
     parserGrep.set_defaults (fun = grep)
-
-
-    parserComplete = subparsers.add_parser (
-        "complete",
-        help = "find completions at point",
-        description =
-        "Find possible code completions at a given position in the source code.")
-    parserComplete.add_argument ("fileName", metavar = "FILE_NAME",
-                                 help = "source file name")
-    parserComplete.add_argument ("line", metavar = "LINE",
-                                 help = "Line number")
-    parserComplete.add_argument ("column", metavar = "COLUMN",
-                                 help = "Column number")
-    parserComplete.set_defaults (fun = complete)
 
 
     args = parser.parse_args ()

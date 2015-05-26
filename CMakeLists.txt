@@ -105,7 +105,6 @@ include ("util/CMakeLists.txt")
 
 list (APPEND CLANG_TAGS_SERVER_SOURCES
   MT/stream.cxx
-  clangTags/server/complete.cxx
   clangTags/server/config.cxx
   clangTags/server/findDefinition.cxx
   clangTags/server/grep.cxx

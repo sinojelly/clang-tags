@@ -62,7 +62,6 @@ relies on the [[http://clang.llvm.org][clang]] compiler (via the libclang interf
       interface :
       - search for symbol definitions in the source code,
       - search for symbol uses in the source code,
-      - auto-complete partially entered code,
    4. integrate these features into Emacs.
 
 

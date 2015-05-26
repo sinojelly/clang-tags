@@ -5,7 +5,6 @@
 #include "clangTags/server/index.hxx"
 #include "clangTags/server/findDefinition.hxx"
 #include "clangTags/server/grep.hxx"
-#include "clangTags/server/complete.hxx"
 #include "clangTags/server/exit.hxx"
 
 #include "MT/stream.hxx"
@@ -54,7 +53,6 @@ public:
       .add (new ClangTags::Server::Index  (indexer_))
       .add (new ClangTags::Server::FindDefinition (storage_, cache_))
       .add (new ClangTags::Server::Grep   (storage_))
-      .add (new ClangTags::Server::Complete (storage_, cache_))
       .add (new ClangTags::Server::Exit)
       .prompt ("clang-tags> ");
   }
