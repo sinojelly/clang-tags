@@ -1,7 +1,7 @@
 #pragma once
 
 #include "clangTags/storage.hxx"
-#include "clangTags/cache.hxx"
+#include "libclang++/translationUnit.hxx"
 
 namespace ClangTags {
 namespace Indexer {
@@ -16,9 +16,8 @@ public:
   /** @brief Constructor
    *
    * @param storage  Storage instance
-   * @param cache    Translation units Cache
    */
-  Update (Storage & storage, Cache & cache);
+  Update (Storage & storage);
 
   /** @brief Reindex the source files
    *
@@ -30,7 +29,18 @@ public:
 
 private:
   Storage & storage_;
-  Cache & cache_;
+
+  /** @brief Get the translation unit associated to a source file
+   *
+   * The source file is parsed from scratch.
+   *
+   * @param storage  Storage from which compilation commands can be retrieved
+   * @param fileName full path to the source file
+   *
+   * @return an up-to-date LibClang::TranslationUnit associated to @c fileName
+   */
+  LibClang::TranslationUnit translationUnit (Storage & storage,
+                                             std::string fileName);
 };
 /** @} */
 }

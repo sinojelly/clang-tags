@@ -5,8 +5,8 @@
 namespace ClangTags {
 namespace Indexer {
 
-Indexer::Indexer (Cache & cache)
-  : update_         (storage_, cache),
+Indexer::Indexer ()
+  : update_         (storage_),
     indexRequested_ (true),
     indexUpdated_   (false),
     watcher_        (NULL)

@@ -26,10 +26,8 @@ public:
    *
    * @ref Indexer objects are constructed with an initial index update already
    * scheduled (see index()).
-   *
-   * @param cache @ref LibClang::TranslationUnit "TranslationUnit" cache
    */
-  Indexer (Cache & cache);
+  Indexer ();
 
   /** @brief Main loop
    *

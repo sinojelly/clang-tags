@@ -13,8 +13,6 @@ int main (int argc, char **argv) {
                "print this help message and exit");
   options.add ("stdin", 's', 0,
                "read a request from the standard input and exit");
-  options.add ("cachesize", 'l', 1,
-               "specify the maximum size of the translation unit cache (in MB)");
 
   try {
     options.get();
@@ -30,23 +28,7 @@ int main (int argc, char **argv) {
 
   const bool fromStdin = options.getCount ("stdin") > 0;
 
-  // Default to a cache of 1GB.
-  unsigned long cacheLimit = 1024;
-  if (options.getCount ("cachesize") > 0) {
-    try {
-      cacheLimit = std::stoul(options["cachesize"]);
-    } catch (...) {
-      std::cerr << "Invalid cachesize value: " << options["cachesize"] << std::endl;
-      return 1;
-    }
-  }
-  // Convert to bytes from MB.
-  cacheLimit *= 1024 * 1024;
-
-
-  ClangTags::Cache cache (cacheLimit);
-
-  ClangTags::Indexer::Indexer indexer (cache);
+  ClangTags::Indexer::Indexer indexer;
 
 #if defined(HAVE_INOTIFY)
   ClangTags::Watcher::Inotify watcher (indexer);

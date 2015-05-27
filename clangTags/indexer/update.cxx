@@ -84,10 +84,24 @@ private:
 };
 
 
-Update::Update (Storage & storage, Cache & cache)
-  : storage_ (storage),
-    cache_   (cache)
+Update::Update (Storage & storage)
+  : storage_ (storage)
 {}
+
+LibClang::TranslationUnit Update::translationUnit (Storage & storage,
+                                                   std::string fileName) {
+  std::string directory;
+  std::vector<std::string> clArgs;
+  storage.getCompileCommand (fileName, directory, clArgs);
+
+  // chdir() to the correct directory
+  // (whether we need to parse the TU for the first time or reparse it)
+  chdir (directory.c_str());
+
+  static LibClang::Index index;
+  LibClang::TranslationUnit tu = index.parse (clArgs);
+  return tu;
+}
 
 void Update::operator() () {
   Timer totalTimer;
@@ -109,7 +123,7 @@ void Update::operator() () {
                << "  parsing..." << std::flush;
     Timer timer;
 
-    LibClang::TranslationUnit tu = cache_.translationUnit (storage_, fileName);
+    auto tu = translationUnit (storage_, fileName);
 
     double elapsed = timer.get();
     MT::cerr() << "\t" << elapsed << "s." << std::endl;
