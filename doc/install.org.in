@@ -9,7 +9,6 @@
   - =jsoncpp=
   - =libclang= (>= 3.0)
   - =sqlite3=
-  - =socat=
   - =strace=
   - =python= (>= 2.3)
     - a version newer than 2.7 is recommended to benefit from the more recent
@@ -48,8 +47,7 @@
     # Install dependencies
     su -c "apt-get install build-essential git cmake pkg-config \
                            libboost-system-dev libjsoncpp-dev   \
-                           libclang-dev libsqlite3-dev socat    \
-                           strace emacs"
+                           libclang-dev libsqlite3-dev strace emacs"
     
     # Get clang-tags sources
     mkdir clang-tags && cd clang-tags
