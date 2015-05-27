@@ -4,10 +4,10 @@
 #if defined HAVE_INOTIFY
 
 #include "watcher.hxx"
-
 #include "clangTags/storage.hxx"
 
 #include <atomic>
+#include <unordered_set>
 
 namespace ClangTags {
 namespace Watcher {
@@ -59,20 +59,9 @@ public:
 private:
   void update_();
 
-  class Map {
-  public:
-    void add (const std::string & fileName, int wd);
-    std::string fileName (int wd);
-    bool contains (const std::string & fileName);
-
-  private:
-    std::map<std::string, int> wd_;
-    std::map<int, std::string> file_;
-  };
-
   Storage storage_;
   int fd_inotify_;
-  Map inotifyMap_;
+  std::unordered_set<std::string> watchedFiles_;
   std::atomic_bool updateRequested_;
   std::atomic_bool exitRequested_;
 };

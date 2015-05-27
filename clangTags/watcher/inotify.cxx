@@ -9,19 +9,6 @@
 namespace ClangTags {
 namespace Watcher {
 
-void Inotify::Map::add (const std::string & fileName, int wd) {
-  wd_[fileName] = wd;
-  file_[wd] = fileName;
-}
-
-std::string Inotify::Map::fileName (int wd) {
-  return file_[wd];
-}
-
-bool Inotify::Map::contains (const std::string & fileName) {
-  return wd_.count(fileName)>0;
-}
-
 Inotify::Inotify (Indexer::Indexer & indexer)
   : Watcher (indexer),
     updateRequested_ (true),
@@ -54,7 +41,7 @@ void Inotify::update_ () {
   for (const auto &fileName : storage_.listFiles()) {
 
     // Skip already watched files
-    if (inotifyMap_.contains(fileName)) {
+    if (watchedFiles_.count(fileName)) {
       continue;
     }
 
@@ -64,7 +51,7 @@ void Inotify::update_ () {
       perror ("inotify_add_watch");
     }
 
-    inotifyMap_.add (fileName, wd);
+    watchedFiles_.insert(fileName);
   }
 }
 
