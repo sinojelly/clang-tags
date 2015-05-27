@@ -9,7 +9,8 @@ Indexer::Indexer ()
   : update_         (storage_),
     indexRequested_ (true),
     indexUpdated_   (false),
-    watcher_        (NULL)
+    watcher_        (NULL),
+    exitRequested_  (false)
 {}
 
 void Indexer::setWatcher (Watcher::Watcher * watcher)
@@ -19,6 +20,11 @@ void Indexer::setWatcher (Watcher::Watcher * watcher)
 
 void Indexer::index () {
   indexRequested_.set (true);
+}
+
+void Indexer::exit () {
+  exitRequested_.store(true, std::memory_order_relaxed);
+  indexRequested_.set(false);
 }
 
 void Indexer::wait () {
@@ -42,6 +48,9 @@ void Indexer::operator() () {
   updateIndex_();
 
   for ( ; ; ) {
+    if (exitRequested_.load(std::memory_order_relaxed))
+      break;
+
     // Check whether a re-indexing was requested
     if (indexRequested_.get() == true) {
       updateIndex_();

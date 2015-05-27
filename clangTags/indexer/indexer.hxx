@@ -3,6 +3,7 @@
 #include "clangTags/storage.hxx"
 #include "update.hxx"
 #include "MT/sFlag.hxx"
+#include <atomic>
 
 namespace ClangTags { namespace Watcher { class Watcher; }}
 
@@ -43,6 +44,8 @@ public:
    */
   void index ();
 
+  void exit ();
+
   /** @brief Wait until the index is updated
    *
    * Upon calling this method, the calling thread is put to sleep until the
@@ -67,6 +70,7 @@ private:
   MT::SFlag<bool> indexRequested_;
   MT::SFlag<bool> indexUpdated_;
   Watcher::Watcher * watcher_;
+  std::atomic_bool exitRequested_;
 };
 /** @} */
 }

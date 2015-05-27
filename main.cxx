@@ -1,11 +1,12 @@
 #include "config.h"
 
 #include "getopt++/getopt.hxx"
-#include "MT/threadsList.hxx"
 
 #include "clangTags/indexer/indexer.hxx"
 #include "clangTags/watcher/inotify.hxx"
 #include "clangTags/server/server.hxx"
+
+#include <thread>
 
 int main (int argc, char **argv) {
   Getopt options (argc, argv);
@@ -36,14 +37,23 @@ int main (int argc, char **argv) {
 #endif
 
   try {
-    MT::ThreadsList threads;
-    threads.add (boost::ref(indexer));
+    std::vector<std::thread> threads;
+
+    threads.emplace_back(std::ref(indexer));
 #if defined(HAVE_INOTIFY)
-    threads.add (boost::ref(watcher));
+    threads.emplace_back(std::ref(watcher));
 #endif
 
     ClangTags::Server::Server server (indexer);
     server.run (fromStdin);
+
+    indexer.exit();
+#if defined(HAVE_INOTIFY)
+    watcher.exit();
+#endif
+
+    for (auto &t : threads)
+      t.join();
   }
   catch (std::exception& e) {
     std::cerr << std::endl << "Caught exception: " << e.what() << std::endl;

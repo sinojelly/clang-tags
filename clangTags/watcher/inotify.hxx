@@ -52,6 +52,10 @@ public:
    */
   void update ();
 
+  /** @brief Request the inotify loop to quit
+   */
+  void exit ();
+
 private:
   void update_();
 
@@ -70,6 +74,7 @@ private:
   int fd_inotify_;
   Map inotifyMap_;
   std::atomic_bool updateRequested_;
+  std::atomic_bool exitRequested_;
 };
 /** @} */
 }

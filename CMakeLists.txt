@@ -11,7 +11,7 @@ include (CheckFunctionExists)
 include (CheckIncludeFile)
 set (CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 
-add_definitions (-Wall -std=c++14)
+add_definitions (-Wall -std=c++14 -pthread)
 if ("${CMAKE_BUILD_TYPE}" STREQUAL Release)
   add_definitions (-O3)
 else ("${CMAKE_BUILD_TYPE}" STREQUAL Release)
@@ -116,7 +116,7 @@ list (APPEND CLANG_TAGS_SERVER_SOURCES
   main.cxx
   )
 add_executable (clang-tags-server ${CLANG_TAGS_SERVER_SOURCES})
-target_link_libraries (clang-tags-server ${LIBS})
+target_link_libraries (clang-tags-server ${LIBS} -lpthread)
 
 
 function (ct_template path)

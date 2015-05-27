@@ -21,7 +21,8 @@ bool Inotify::Map::contains (const std::string & fileName) {
 
 Inotify::Inotify (Indexer::Indexer & indexer)
   : Watcher (indexer),
-    updateRequested_ (true)
+    updateRequested_ (true),
+    exitRequested_ (false)
 {
   // Initialize inotify
   fd_inotify_ = inotify_init ();
@@ -41,11 +42,13 @@ void Inotify::update () {
   updateRequested_.store(true, std::memory_order_relaxed);
 }
 
+void Inotify::exit () {
+  exitRequested_.store(true, std::memory_order_relaxed);
+}
+
 void Inotify::update_ () {
   std::cerr << "Updating watchlist..." << std::endl;
-  std::vector<std::string> list = storage_.listFiles();
-  for (auto it=list.begin() ; it!=list.end() ; ++it) {
-    std::string fileName = *it;
+  for (const auto &fileName : storage_.listFiles()) {
 
     // Skip already watched files
     if (inotifyMap_.contains(fileName)) {
@@ -71,8 +74,10 @@ void Inotify::operator() () {
   fd.events = POLLIN;
 
   for ( ; ; ) {
+
     // Check for interruptions
-    boost::this_thread::interruption_point();
+    if (exitRequested_.load(std::memory_order_relaxed))
+      return;
 
     // Check whether a re-indexing was requested
     bool requested{true};
@@ -104,8 +109,7 @@ void Inotify::operator() () {
           struct inotify_event *event = (struct inotify_event *) &(buf[i]);
           i += sizeof (struct inotify_event) + event->len;
 
-          std::cerr << "Detected modification of "
-                    << inotifyMap_.fileName(event->wd) << std::endl;
+          std::cerr << "Detected modification of " << event->name << std::endl;
         }
 
         // Schedule an index update
