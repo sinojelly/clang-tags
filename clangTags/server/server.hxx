@@ -7,7 +7,6 @@
 #include "clangTags/server/grep.hxx"
 #include "clangTags/server/exit.hxx"
 
-#include "MT/stream.hxx"
 #include <boost/asio.hpp>
 
 namespace ClangTags {
@@ -57,7 +56,7 @@ public:
    * Removes the pid and socket files.
    */
   ~Server () {
-    MT::cerr() << "Server exiting..." << std::endl;
+    std::cerr << "Server exiting..." << std::endl;
     unlink (socketPath_.c_str());
     unlink (pidPath_.c_str());
   }
@@ -79,7 +78,7 @@ public:
     }
     else {
       try {
-        MT::cerr() << "Server starting with pid: " << getpid() << std::endl;
+        std::cerr << "Server starting with pid: " << getpid() << std::endl;
 
         boost::asio::io_service io_service;
         boost::asio::local::stream_protocol::endpoint endpoint (socketPath_);

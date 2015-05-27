@@ -3,8 +3,8 @@
 #include "libclang++/libclang++.hxx"
 
 #include "util/util.hxx"
-#include "MT/stream.hxx"
 
+#include <unistd.h>
 #include <string>
 #include <fstream>
 
@@ -60,7 +60,7 @@ public:
       const bool needsUpdate = storage_.beginFile (fileName);
       needsUpdate_[fileName] = needsUpdate;
       if (needsUpdate) {
-        MT::cerr() << "    " << fileName << std::endl;
+        std::cerr << "    " << fileName << std::endl;
       }
       storage_.addInclude (fileName, sourceFile_);
     }
@@ -108,8 +108,8 @@ void Update::operator() () {
   double parseTime = 0;
   double indexTime = 0;
 
-  MT::cerr() << std::endl
-             << "-- Updating index" << std::endl;
+  std::cerr << std::endl
+            << "-- Updating index" << std::endl;
 
   std::vector<std::string> exclude;
   storage_.getOption ("index.exclude", exclude);
@@ -119,25 +119,25 @@ void Update::operator() () {
 
   std::string fileName;
   while ((fileName = storage_.nextFile()) != "") {
-    MT::cerr() << fileName << ":" << std::endl
-               << "  parsing..." << std::flush;
+    std::cerr << fileName << ":" << std::endl
+              << "  parsing..." << std::flush;
     Timer timer;
 
     auto tu = translationUnit (storage_, fileName);
 
     double elapsed = timer.get();
-    MT::cerr() << "\t" << elapsed << "s." << std::endl;
+    std::cerr << "\t" << elapsed << "s." << std::endl;
     parseTime += elapsed;
 
     // Print clang diagnostics if requested
     if (diagnostics) {
       for (unsigned int N = tu.numDiagnostics(),
              i = 0 ; i < N ; ++i) {
-        MT::cerr() << tu.diagnostic (i) << std::endl << std::endl;
+        std::cerr << tu.diagnostic (i) << std::endl << std::endl;
       }
     }
 
-    MT::cerr() << "  indexing..." << std::endl;
+    std::cerr << "  indexing..." << std::endl;
     timer.reset();
 
     LibClang::Cursor top (tu);
@@ -148,13 +148,13 @@ void Update::operator() () {
     }
 
     elapsed = timer.get();
-    MT::cerr() << "  indexing...\t" << elapsed << "s." << std::endl;
+    std::cerr << "  indexing...\t" << elapsed << "s." << std::endl;
     indexTime += elapsed;
   }
 
-  MT::cerr() << "Parsing time:  " << parseTime << "s." << std::endl
-             << "Indexing time: " << indexTime << "s." << std::endl
-             << "TOTAL:         " << totalTimer.get() << "s." << std::endl;
+  std::cerr << "Parsing time:  " << parseTime << "s." << std::endl
+            << "Indexing time: " << indexTime << "s." << std::endl
+            << "TOTAL:         " << totalTimer.get() << "s." << std::endl;
 }
 }
 }

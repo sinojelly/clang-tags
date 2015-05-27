@@ -1,7 +1,5 @@
 #include "inotify.hxx"
 
-#include "MT/stream.hxx"
-
 #include <sys/inotify.h>
 #include <sys/poll.h>
 
@@ -44,7 +42,7 @@ void Inotify::update () {
 }
 
 void Inotify::update_ () {
-  MT::cerr() << "Updating watchlist..." << std::endl;
+  std::cerr << "Updating watchlist..." << std::endl;
   std::vector<std::string> list = storage_.listFiles();
   for (auto it=list.begin() ; it!=list.end() ; ++it) {
     std::string fileName = *it;
@@ -54,7 +52,7 @@ void Inotify::update_ () {
       continue;
     }
 
-    MT::cerr() << "Watching " << fileName << std::endl;
+    std::cerr << "Watching " << fileName << std::endl;
     int wd = inotify_add_watch (fd_inotify_, fileName.c_str(), IN_MODIFY);
     if (wd == -1) {
       perror ("inotify_add_watch");
@@ -106,7 +104,7 @@ void Inotify::operator() () {
           struct inotify_event *event = (struct inotify_event *) &(buf[i]);
           i += sizeof (struct inotify_event) + event->len;
 
-          MT::cerr() << "Detected modification of "
+          std::cerr << "Detected modification of "
                     << inotifyMap_.fileName(event->wd) << std::endl;
         }
 
