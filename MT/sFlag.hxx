@@ -1,6 +1,7 @@
 #pragma once
 
-#include <boost/thread.hpp>
+#include <mutex>
+#include <condition_variable>
 
 namespace MT {
 /** @addtogroup mt
@@ -33,7 +34,7 @@ public:
    */
   void set (const T & val) {
     {
-      boost::lock_guard<boost::mutex> lock (mtx_);
+      std::lock_guard<std::mutex> lock (mtx_);
       val_  = val;
       flag_ = true;
     }
@@ -48,7 +49,7 @@ public:
    * @return updated flag value
    */
   T get () {
-    boost::unique_lock<boost::mutex> lock (mtx_);
+    std::unique_lock<std::mutex> lock (mtx_);
     flag_ = false;
     while (!flag_) {
       cond_.wait(lock);
@@ -57,8 +58,8 @@ public:
   }
 
 private:
-  boost::condition_variable cond_;
-  boost::mutex mtx_;
+  std::condition_variable cond_;
+  std::mutex mtx_;
   bool flag_;
   T val_;
 };

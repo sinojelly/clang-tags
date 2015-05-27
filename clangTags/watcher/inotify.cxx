@@ -1,5 +1,8 @@
 #include "inotify.hxx"
 
+#include <iostream>
+
+#include <unistd.h>
 #include <sys/inotify.h>
 #include <sys/poll.h>
 

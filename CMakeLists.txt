@@ -24,7 +24,7 @@ include_directories (${CMAKE_SOURCE_DIR})
 # Check for Boost (system + asio)
 find_package (Boost
   REQUIRED
-  COMPONENTS system thread
+  COMPONENTS system
 )
 include_directories (${Boost_INCLUDE_DIRS})
 link_directories (${Boost_LIBRARY_DIRS})
