@@ -5,9 +5,9 @@
 
 #include "watcher.hxx"
 
-#include "MT/aFlag.hxx"
-
 #include "clangTags/storage.hxx"
+
+#include <atomic>
 
 namespace ClangTags {
 namespace Watcher {
@@ -69,7 +69,7 @@ private:
   Storage storage_;
   int fd_inotify_;
   Map inotifyMap_;
-  MT::AFlag<bool> updateRequested_;
+  std::atomic_bool updateRequested_;
 };
 /** @} */
 }

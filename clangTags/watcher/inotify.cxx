@@ -40,7 +40,7 @@ Inotify::~Inotify () {
 }
 
 void Inotify::update () {
-  updateRequested_.set (true);
+  updateRequested_.store(true, std::memory_order_relaxed);
 }
 
 void Inotify::update_ () {
@@ -77,12 +77,13 @@ void Inotify::operator() () {
     boost::this_thread::interruption_point();
 
     // Check whether a re-indexing was requested
-    if (updateRequested_.get() == true) {
+    bool requested{true};
+    if (updateRequested_.compare_exchange_weak(requested, false,
+                                               std::memory_order_release,
+                                               std::memory_order_relaxed)) {
+
       // Reindex and update list
       update_();
-
-      // Reset flag and notify waiting threads
-      updateRequested_.set (false);
     }
 
     // Look for an inotify event
