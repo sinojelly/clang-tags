@@ -21,16 +21,14 @@ Load::Load (Storage & storage,
        ->metavar ("FILEPATH")
        ->description ("Load compilation commands from a JSON compilation database"));
 
-  const size_t size = 4096;
-  cwd_ = new char[size];
-  if (getcwd (cwd_, size) == NULL) {
+  cwd_.resize(4096);
+  if (getcwd (cwd_.data(), cwd_.size()) == NULL) {
     // FIXME: correctly handle this case
     throw std::runtime_error ("Not enough space to store current directory name.");
   }
 }
 
 Load::~Load () {
-  delete[] cwd_;
 }
 
 void Load::defaults () {
@@ -40,7 +38,7 @@ void Load::defaults () {
 void Load::run (std::ostream & cout) {
   // Change back to the original WD (in case `index` or `update` would have
   // changed it)
-  chdir (cwd_);
+  chdir (cwd_.data());
 
   Json::Value root;
   Json::Reader reader;
@@ -54,12 +52,12 @@ void Load::run (std::ostream & cout) {
 
   auto transaction (storage_.beginTransaction());
 
-  for (unsigned int i=0 ; i<root.size() ; ++i) {
-    std::string fileName = root[i]["file"].asString();
-    std::string directory = root[i]["directory"].asString();
+  for (const auto &section : root) {
+    auto fileName = section["file"].asString();
+    auto directory = section["directory"].asString();
 
     std::vector<std::string> clArgs;
-    std::istringstream command (root[i]["command"].asString());
+    std::istringstream command (section["command"].asString());
     std::string arg;
     std::getline (command, arg, ' ');
     do {

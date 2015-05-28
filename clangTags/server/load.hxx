@@ -50,7 +50,7 @@ private:
 
   Storage & storage_;
   Indexer::Indexer & indexer_;
-  char* cwd_;
+  std::vector<char> cwd_;
 };
 /** @} */
 }
