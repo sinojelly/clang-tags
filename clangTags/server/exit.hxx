@@ -18,11 +18,9 @@ class Exit : public Request::CommandParser
 public:
 	/** @brief Constructor
 	 */
-	Exit
-	    ();
+	Exit();
 
-	void run
-	    (std::ostream &cout);
+	void run(std::ostream &cout);
 };
 /** @} */
 }

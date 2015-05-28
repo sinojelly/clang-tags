@@ -80,8 +80,7 @@ public:
 	 *
 	 * @return a code indicating what to do next
 	 */
-	virtual CXChildVisitResult visit
-	    (Cursor cursor, LibClang::Cursor parent) = 0;
+	virtual CXChildVisitResult visit(Cursor cursor, LibClang::Cursor parent) = 0;
 };
 
 /** @} */

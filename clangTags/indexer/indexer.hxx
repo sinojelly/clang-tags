@@ -29,8 +29,7 @@ public:
 	 * @ref Indexer objects are constructed with an initial index update already
 	 * scheduled (see index()).
 	 */
-	Indexer
-	    ();
+	Indexer();
 
 	/** @brief Main loop
 	 *
@@ -38,26 +37,22 @@ public:
 	 * coming from other threads (see index()), and updates the source files
 	 * index (see Update)
 	 */
-	void operator()
-	    ();
+	void operator()();
 
 	/** @brief Schedule an index update
 	 *
 	 * Calling this method asks the Indexer to update the source files index.
 	 */
-	void index
-	    ();
+	void index();
 
-	void exit
-	    ();
+	void exit();
 
 	/** @brief Wait until the index is updated
 	 *
 	 * Upon calling this method, the calling thread is put to sleep until the
 	 * source files index has been updated.
 	 */
-	void wait
-	    ();
+	void wait();
 
 	/** @brief Register a watcher instance
 	 *
@@ -66,12 +61,10 @@ public:
 	 *
 	 * @param watcher  pointer to a @ref Watcher::Watcher "Watcher" instance
 	 */
-	void setWatcher
-	    (Watcher::Watcher * watcher);
+	void setWatcher(Watcher::Watcher * watcher);
 
 private:
-	void updateIndex_
-	    ();
+	void updateIndex_();
 
 	Storage storage_;
 	Update update_;

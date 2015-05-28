@@ -18,8 +18,7 @@ public:
 	 *
 	 * @param storage  Storage instance
 	 */
-	Update
-	    (Storage &storage);
+	Update(Storage &storage);
 
 	/** @brief Reindex the source files
 	 *
@@ -27,8 +26,7 @@ public:
 	 * have been modified in the filesystem since last indexing. For each of them,
 	 * (re)parse and (re)index the associated translation unit.
 	 */
-	void operator()
-	    ();
+	void operator()();
 
 private:
 	Storage &storage_;
@@ -42,9 +40,8 @@ private:
 	 *
 	 * @return an up-to-date LibClang::TranslationUnit associated to @c fileName
 	 */
-	LibClang::TranslationUnit translationUnit
-	    (Storage &storage,
-	    std::string fileName);
+	LibClang::TranslationUnit translationUnit(Storage &storage,
+	                                          std::string fileName);
 };
 /** @} */
 }

@@ -30,10 +30,10 @@ public:
 	 * - a (line, column) pair
 	 */
 	struct Position {
-		std::string file;                       /**< @brief file name */
-		unsigned int line;                      /**< @brief line number */
-		unsigned int column;                    /**< @brief column number */
-		unsigned int offset;                    /**< @brief offset in characters since the file beginning */
+		std::string file;                               /**< @brief file name */
+		unsigned int line;                              /**< @brief line number */
+		unsigned int column;                            /**< @brief column number */
+		unsigned int offset;                            /**< @brief offset in characters since the file beginning */
 	};
 
 	/** @brief Equality operator
@@ -42,8 +42,7 @@ public:
 	 *
 	 * @return true if the two source locations are identical
 	 */
-	bool operator==
-	    (const SourceLocation &other) const;
+	bool operator==(const SourceLocation &other) const;
 
 	/** @brief Get the associated physical position
 	 *
@@ -52,15 +51,12 @@ public:
 	 *
 	 * @return a Position structure
 	 */
-	const Position expansionLocation
-	    () const;
+	const Position expansionLocation() const;
 
 private:
-	SourceLocation
-	    (CXSourceLocation raw);
+	SourceLocation(CXSourceLocation raw);
 	CXSourceLocation location_;
-	const CXSourceLocation &raw
-	    () const;
+	const CXSourceLocation &raw() const;
 
 	// Friend declaration
 	friend class TranslationUnit;

@@ -28,14 +28,11 @@ public:
 	 * @param indexer @ref Indexer instance to be notified after the compilation
 	 *                database has been loaded.
 	 */
-	Load
-	    (Storage &storage,
-	    Indexer::Indexer &indexer);
-	~Load
-	    ();
+	Load(Storage &storage,
+	     Indexer::Indexer &indexer);
+	~Load();
 
-	void defaults
-	    ();
+	void defaults();
 
 	/** @brief Read the compilation database.
 	 *
@@ -44,8 +41,7 @@ public:
 	 *
 	 * @param cout  output stream
 	 */
-	void run
-	    (std::ostream &cout);
+	void run(std::ostream &cout);
 
 private:
 	struct Args {

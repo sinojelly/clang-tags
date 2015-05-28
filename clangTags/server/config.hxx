@@ -25,14 +25,11 @@ public:
 	 *
 	 * @param storage @ref Storage instance used to store options
 	 */
-	Config
-	    (Storage &storage);
+	Config(Storage &storage);
 
-	void defaults
-	    ();
+	void defaults();
 
-	void run
-	    (std::ostream &cout);
+	void run(std::ostream &cout);
 
 private:
 	struct Args {

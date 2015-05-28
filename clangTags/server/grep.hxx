@@ -21,14 +21,11 @@ public:
 	 *
 	 * @param storage @ref Storage instance where to look for indexed tags
 	 */
-	Grep
-	    (Storage &storage);
+	Grep(Storage &storage);
 
-	void defaults
-	    ();
+	void defaults();
 
-	void run
-	    (std::ostream &cout);
+	void run(std::ostream &cout);
 
 private:
 	struct Args {

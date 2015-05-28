@@ -21,15 +21,13 @@ public:
 	 * @param db SQLite database connection.
 	 * @throw Error
 	 */
-	Transaction
-	    (Database &db);
+	Transaction(Database &db);
 
 	/** @brief Destructor
 	 *
 	 * End the transaction.
 	 */
-	~Transaction
-	    ();
+	~Transaction();
 
 private:
 	Database &db_;

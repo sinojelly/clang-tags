@@ -33,11 +33,9 @@ public:
 	 *
 	 * @param indexer  @ref Indexer::Indexer "Indexer" instance to notify
 	 */
-	Inotify
-	    (Indexer::Indexer &indexer);
+	Inotify(Indexer::Indexer &indexer);
 
-	~Inotify
-	    ();
+	~Inotify();
 
 	/** @brief Main loop
 	 *
@@ -46,25 +44,21 @@ public:
 	 * - notifications that sources have changed on the file system (using Linux's
 	 *   @c inotify service)
 	 */
-	void operator()
-	    ();
+	void operator()();
 
 	/** @brief Schedule an update of the watched source files
 	 *
 	 * Calling this method asks the Watch thread to update its list of source
 	 * files to watch
 	 */
-	void update
-	    ();
+	void update();
 
 	/** @brief Request the inotify loop to quit
 	 */
-	void exit
-	    ();
+	void exit();
 
 private:
-	void update_
-	    ();
+	void update_();
 
 	Storage storage_;
 	int fd_inotify_;

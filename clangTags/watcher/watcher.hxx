@@ -38,8 +38,7 @@ public:
 	 * to watch on the filesystem. The source files list should be retrieved from
 	 * the compilation database stored in a Storage instance.
 	 */
-	virtual void update
-	    () = 0;
+	virtual void update() = 0;
 
 protected:
 	/** @brief Schedule a reindexing of the source code

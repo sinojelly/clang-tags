@@ -17,9 +17,9 @@ struct MyClass {
 	MyClass()
 	{
 		debug("MyClass::MyClass");
-	}                                                            //(ref:defCtor)
+	}                                                                //(ref:defCtor)
 
-	void display()                                               //(ref:defDisplayT)
+	void display()                                                   //(ref:defDisplayT)
 	{
 		std::cout << "MyClass<T>::display()" << std::endl;
 	}
@@ -27,7 +27,7 @@ struct MyClass {
 
 template <>
 struct MyClass<int> {
-	void display()                                               //(ref:defDisplayInt)
+	void display()                                                   //(ref:defDisplayInt)
 	{
 		std::cout << "MyClass<int>::display()" << std::endl;
 	}
@@ -35,11 +35,11 @@ struct MyClass<int> {
 
 int main()
 {
-	int display = 3;                                             //(ref:display1)
+	int display = 3;                                                 //(ref:display1)
 
-	MyClass<double> a;                                           //(ref:ctor)
-	a.display();                                                 //(ref:display2)
+	MyClass<double> a;                                               //(ref:ctor)
+	a.display();                                                     //(ref:display2)
 
 	MyClass<int> b;
-	b.display();                                                 //(ref:display3)
+	b.display();                                                     //(ref:display3)
 }

@@ -34,8 +34,7 @@ public:
 	 *    @param argv           command-line arguments
 	 *    @param documentation  description of non-switch command-line arguments
 	 */
-	Getopt
-	    (int argc, char *const * argv, const char *documentation = "Usage: %c [options]");
+	Getopt(int argc, char *const * argv, const char *documentation = "Usage: %c [options]");
 
 
 	/** @brief Define an option
@@ -45,23 +44,20 @@ public:
 	 *    @param description     long description of the option
 	 *    @param argDescription  argument description if applicable
 	 */
-	void add
-	    (const char *longOpt, char shortOpt, int argument,
-	    const char *description = "", const char *argDescription = "");
+	void add(const char *longOpt, char shortOpt, int argument,
+	         const char *description = "", const char *argDescription = "");
 
 
 	/** @brief Process options from the command-line
 	 *
 	 *  This method must be called after all calls to 'add'.
 	 */
-	void get
-	    ();
+	void get();
 
 
 	/** @brief Get usage string
 	 */
-	inline std::string usage
-	    ();
+	inline std::string usage();
 
 
 	/** @brief Get the value of a command-line option
@@ -70,53 +66,44 @@ public:
 	 *  @param opt  option name
 	 *  @return "" if the switch is unset
 	 */
-	inline std::string operator[]
-	    (std::string opt) const;
+	inline std::string operator[](std::string opt) const;
 
 	/** @brief Get the number of times a command-line switch was given
 	 *  @param opt  option name
 	 *  @return count
 	 */
-	inline int getCount
-	    (std::string opt) const;
+	inline int getCount(std::string opt) const;
 
 	/** @brief Get all provided values for a command-line option
 	 *
 	 *  @param opt option name
 	 *  @return a vector of values
 	 */
-	inline const OptionValues &getAll
-	    (std::string opt) const;
+	inline const OptionValues &getAll(std::string opt) const;
 
 
 	/** @brief Shift remaining positional arguments
 	 *  @return the first remaining positional argument, "" if there are no more positional args
 	 */
-	inline std::string shift
-	    ();
+	inline std::string shift();
 
 	/** @brief Get number of remaining positional arguments
 	 */
-	inline int argc
-	    () const;
+	inline int argc() const;
 
 	/** @brief Get remaining positional arguments
 	 */
-	inline char const *const * argv
-	    () const;
+	inline char const *const * argv() const;
 
 	/** @brief Get remaining positional arguments
 	 */
-	inline std::string argv
-	    (int i) const;
+	inline std::string argv(int i) const;
 
 private:
-	void addOpt
-	    (const char *longOpt, char shortOpt, int argument,
-	    const char *description, const char *argDescription);
-	void addUsage
-	    (const char *longOpt, char shortOpt, int argument,
-	    const char *description, const char *argDescription);
+	void addOpt(const char *longOpt, char shortOpt, int argument,
+	            const char *description, const char *argDescription);
+	void addUsage(const char *longOpt, char shortOpt, int argument,
+	              const char *description, const char *argDescription);
 
 
 private:

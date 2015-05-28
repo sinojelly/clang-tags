@@ -50,7 +50,7 @@ public:
 			return CXChildVisit_Continue;
 		}
 
-		{                 // Skip excluded paths
+		{                         // Skip excluded paths
 			auto it  = exclude_.begin();
 			auto end = exclude_.end();
 			for (; it != end; ++it)

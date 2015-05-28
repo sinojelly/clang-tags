@@ -233,8 +233,7 @@ public:
 	 *
 	 * @param cin  input stream
 	 */
-	virtual void parse
-	    (std::istream &cin) = 0;
+	virtual void parse(std::istream &cin) = 0;
 
 	/** @brief Retrieve the key value from a JSON value and handle it
 	 *
@@ -242,8 +241,7 @@ public:
 	 *
 	 * @param json  JSON request
 	 */
-	virtual void set
-	    (const Json::Value &json) = 0;
+	virtual void set(const Json::Value &json) = 0;
 
 protected:
 	/** @brief Description of the default key value
@@ -529,8 +527,7 @@ protected:
 	 *
 	 * @param cout  output stream for results
 	 */
-	virtual void run
-	    (std::ostream &cout) = 0;
+	virtual void run(std::ostream &cout) = 0;
 
 	/** @brief Add a @ref KeyParserBase "key parser" to the list of parameters
 	 *

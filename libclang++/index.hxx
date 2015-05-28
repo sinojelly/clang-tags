@@ -22,8 +22,7 @@ class Index
 public:
 	/** @brief default constructor
 	 */
-	Index
-	    ();
+	Index();
 
 	/** @brief Create a translation unit from a command-line
 	 *
@@ -35,8 +34,7 @@ public:
 	 *
 	 * @return The corresponfing TranslationUnit object
 	 */
-	TranslationUnit parse
-	    (int argc, char const *const *const argv) const;
+	TranslationUnit parse(int argc, char const *const *const argv) const;
 
 	/** @brief Create a translation unit from a command-line
 	 *
@@ -47,12 +45,10 @@ public:
 	 *
 	 * @return The corresponfing TranslationUnit object
 	 */
-	TranslationUnit parse
-	    (const std::vector<std::string> &args) const;
+	TranslationUnit parse(const std::vector<std::string> &args) const;
 
 private:
-	const CXIndex &raw
-	    () const;
+	const CXIndex &raw() const;
 	struct Index_ {
 		CXIndex index_;
 		Index_(CXIndex index) : index_(index)

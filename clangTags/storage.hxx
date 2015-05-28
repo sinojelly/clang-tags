@@ -17,10 +17,8 @@ namespace ClangTags {
 class Storage
 {
 public:
-	Storage
-	    ();
-	~Storage
-	    ();
+	Storage();
+	~Storage();
 
 
 	/** @name Options management
@@ -32,33 +30,29 @@ public:
 	 * @param[in]  name         option name
 	 * @param[out] destination  destination where the value will be stored
 	 */
-	void getOption
-	    (const std::string &name, std::string &destination);
+	void getOption(const std::string &name, std::string &destination);
 
 	/** @brief Retrieve the value for an option
 	 *
 	 * @param[in]  name         option name
 	 * @param[out] destination  destination where the value will be stored
 	 */
-	void getOption
-	    (const std::string &name, bool &destination);
+	void getOption(const std::string &name, bool &destination);
 
 	/** @brief Retrieve the value for an option
 	 *
 	 * @param[in]  name         option name
 	 * @param[out] destination  destination where the value will be stored
 	 */
-	void getOption
-	    (const std::string &name,
-	    std::vector<std::string> &destination);
+	void getOption(const std::string &name,
+	               std::vector<std::string> &destination);
 
 	/** @brief Store an option value
 	 *
 	 * @param name  option name
 	 * @param value option value
 	 */
-	void setOption
-	    (const std::string &name, const std::string &value);
+	void setOption(const std::string &name, const std::string &value);
 
 	/** @brief Store a default value for an option
 	 *
@@ -68,8 +62,7 @@ public:
 	 * @param name  option name
 	 * @param value option value
 	 */
-	void setOptionDefault
-	    (const std::string &name, const std::string &value);
+	void setOptionDefault(const std::string &name, const std::string &value);
 
 	/** @} */
 
@@ -86,8 +79,7 @@ public:
 	 *
 	 * @return a vector of file paths
 	 */
-	std::vector<std::string> listFiles
-	    ();
+	std::vector<std::string> listFiles();
 
 	/** @brief Retrieve the compilation command associated to a source file
 	 *
@@ -101,10 +93,9 @@ public:
 	 * @param[out] directory  compilation directory
 	 * @param[out] args       compilation command
 	 */
-	void getCompileCommand
-	    (const std::string &fileName,
-	    std::string &directory,
-	    std::vector<std::string> &args);
+	void getCompileCommand(const std::string &fileName,
+	                       std::string &directory,
+	                       std::vector<std::string> &args);
 
 	/** @brief Store the compilation command associated to a source file
 	 *
@@ -112,10 +103,9 @@ public:
 	 * @param directory  compilation directory
 	 * @param args       compilation command
 	 */
-	void setCompileCommand
-	    (const std::string &fileName,
-	    const std::string &directory,
-	    const std::vector<std::string> &args);
+	void setCompileCommand(const std::string &fileName,
+	                       const std::string &directory,
+	                       const std::vector<std::string> &args);
 
 	/** @brief Retrieve the next file needing to be indexed
 	 *
@@ -124,17 +114,15 @@ public:
 	 *
 	 * @return absolute path to the source file.
 	 */
-	std::string nextFile
-	    ();
+	std::string nextFile();
 
 	/** @brief Declare the inclusion of a header from a source file
 	 *
 	 * @param includedFile absolute path to the header file
 	 * @param sourceFile   absolute path to the source file
 	 */
-	void addInclude
-	    (const std::string &includedFile,
-	    const std::string &sourceFile);
+	void addInclude(const std::string &includedFile,
+	                const std::string &sourceFile);
 
 	/** @} */
 
@@ -153,8 +141,7 @@ public:
 	 * @return @c true if the file needs indexing (i.e. changed on the filesystem
 	 *         since its last indexing)
 	 */
-	bool beginFile
-	    (const std::string &fileName);
+	bool beginFile(const std::string &fileName);
 
 	/** @brief Add a tag in the index
 	 *
@@ -171,14 +158,13 @@ public:
 	 * @param isDeclaration @c true if the current tag is a declaration/definition
 	 */
 	// TODO use a structure instead of a large number of arguments
-	void addTag
-	    (const std::string &usr,
-	    const std::string &kind,
-	    const std::string &spelling,
-	    const std::string &fileName,
-	    const int line1, const int col1, const int offset1,
-	    const int line2, const int col2, const int offset2,
-	    bool isDeclaration);
+	void addTag(const std::string &usr,
+	            const std::string &kind,
+	            const std::string &spelling,
+	            const std::string &fileName,
+	            const int line1, const int col1, const int offset1,
+	            const int line2, const int col2, const int offset2,
+	            bool isDeclaration);
 
 	/** @} */
 
@@ -195,9 +181,8 @@ public:
 	 *
 	 * @return vector of @ref Identifier "identifiers"
 	 */
-	std::vector<ClangTags::Identifier> findDefinition
-	    (const std::string fileName,
-	    int offset);
+	std::vector<ClangTags::Identifier> findDefinition(const std::string fileName,
+	                                                  int offset);
 
 	/** @brief Retrieve all source location referring to a given symbol
 	 *
@@ -205,8 +190,7 @@ public:
 	 *
 	 * @return vector of @ref Identifier::Reference "symbol references"
 	 */
-	std::vector<ClangTags::Identifier::Reference> grep
-	    (const std::string usr);
+	std::vector<ClangTags::Identifier::Reference> grep(const std::string usr);
 
 	/** @} */
 
@@ -218,8 +202,7 @@ public:
 	 *
 	 * @return an Sqlite::Transaction object associated to the database
 	 */
-	Sqlite::Transaction beginTransaction
-	    ();
+	Sqlite::Transaction beginTransaction();
 
 private:
 	class Impl;

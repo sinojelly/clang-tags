@@ -25,11 +25,9 @@ public:
 	 *
 	 * @param storage  @ref Storage instance to look for indexed tags
 	 */
-	FindDefinition
-	    (Storage &storage);
+	FindDefinition(Storage &storage);
 
-	void defaults
-	    ();
+	void defaults();
 
 	/** @brief Find the definition of a symbol in the project sources
 	 *
@@ -38,8 +36,7 @@ public:
 	 *
 	 * @param cout  output stream used to display the results
 	 */
-	void run
-	    (std::ostream &cout);
+	void run(std::ostream &cout);
 
 	/** @brief Pretty print an @ref Identifier
 	 *
@@ -49,9 +46,8 @@ public:
 	 * @param identifier @ref Identifier to print
 	 * @param cout       output stream
 	 */
-	static void prettyPrint
-	    (const ClangTags::Identifier &identifier,
-	    std::ostream &cout);
+	static void prettyPrint(const ClangTags::Identifier &identifier,
+	                        std::ostream &cout);
 
 	/** @brief Display an @ref Identifier in machine-readable format
 	 *
@@ -61,9 +57,8 @@ public:
 	 * @param identifier @ref Identifier to print
 	 * @param cout       output stream
 	 */
-	static void output
-	    (const ClangTags::Identifier &identifier,
-	    std::ostream &cout);
+	static void output(const ClangTags::Identifier &identifier,
+	                   std::ostream &cout);
 
 	/** @brief Display a Cursor in machine-readable format
 	 *
@@ -73,9 +68,8 @@ public:
 	 * @param cursor  @ref LibClang::Cursor instance to print
 	 * @param cout    output stream
 	 */
-	static void output
-	    (LibClang::Cursor cursor,
-	    std::ostream &cout);
+	static void output(LibClang::Cursor cursor,
+	                   std::ostream &cout);
 
 private:
 	struct Args {

@@ -23,11 +23,9 @@ public:
 	 *
 	 * @param indexer  @ref Indexer instance to use
 	 */
-	Index
-	    (Indexer::Indexer &indexer);
+	Index(Indexer::Indexer &indexer);
 
-	void run
-	    (std::ostream &cout);
+	void run(std::ostream &cout);
 
 private:
 	Indexer::Indexer &indexer_;

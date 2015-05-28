@@ -57,8 +57,7 @@ public:
 	 * @return @c SQLITE_OK if everything went well
 	 * @throw Error
 	 */
-	int execute
-	    (char const *const sql);
+	int execute(char const *const sql);
 
 	/** @brief Prepare execution of SQL statements
 	 *
@@ -69,8 +68,7 @@ public:
 	 *
 	 * @return a prepared Statement object for the SQL code
 	 */
-	Statement prepare
-	    (char const *const sql);
+	Statement prepare(char const *const sql);
 
 	/** @brief Retrieve the last SQLite error message
 	 *

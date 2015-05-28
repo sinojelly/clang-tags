@@ -396,7 +396,7 @@ private:
 		                      "  AND includedId=?")
 		          .bind(sourceId).bind(includedId)
 		          .step();
-		if (res == SQLITE_DONE)                 // No matching row
+		if (res == SQLITE_DONE)                         // No matching row
 		{
 			db_.prepare("INSERT INTO includes VALUES (?,?)")
 			.bind(sourceId).bind(includedId)

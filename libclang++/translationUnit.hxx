@@ -31,8 +31,7 @@ public:
 	 * up-to-date source code from the file-system. The source code is re-parsed
 	 * with the same command-line options than the first time.
 	 */
-	void reparse
-	    ();
+	void reparse();
 
 	/** @brief Reparse the translation unit
 	 *
@@ -43,8 +42,7 @@ public:
 	 *
 	 * @param unsaved  A set of unsaved contents for the source files
 	 */
-	void reparse
-	    (UnsavedFiles &unsaved);
+	void reparse(UnsavedFiles &unsaved);
 
 	/** @brief Get the source location for a file/offset in the translation unit
 	 *
@@ -56,8 +54,7 @@ public:
 	 *
 	 * @return A SourceLocation object for the relevant location.
 	 */
-	SourceLocation getLocation
-	    (const char* fileName, unsigned int offset);
+	SourceLocation getLocation(const char* fileName, unsigned int offset);
 
 	/** @brief Get a cursor to the translation unit
 	 *
@@ -66,8 +63,7 @@ public:
 	 *
 	 * @return A Cursor representing the whole translation unit
 	 */
-	Cursor cursor
-	    () const;
+	Cursor cursor() const;
 
 	/** @brief Get the number of diagnostic messages for the translation unit
 	 *
@@ -76,8 +72,7 @@ public:
 	 *
 	 * @return The number of diagnostic messages
 	 */
-	unsigned int numDiagnostics
-	    ();
+	unsigned int numDiagnostics();
 
 	/** @brief Get the i-th diagnostic message for the translation unit
 	 *
@@ -88,23 +83,19 @@ public:
 	 *
 	 * @return A string representing the message
 	 */
-	std::string diagnostic
-	    (unsigned int i);
+	std::string diagnostic(unsigned int i);
 
 	/** @brief Get the memory usage of the translation unit.
 	 *
 	 * @return The memory usage (in bytes) of the translation unit.
 	 */
-	unsigned long memoryUsage
-	    () const;
+	unsigned long memoryUsage() const;
 
 	// TODO Make this method private
-	const CXTranslationUnit &raw
-	    () const;
+	const CXTranslationUnit &raw() const;
 
 private:
-	TranslationUnit
-	    (CXTranslationUnit tu);
+	TranslationUnit(CXTranslationUnit tu);
 
 	struct TranslationUnit_ {
 		CXTranslationUnit translationUnit_;

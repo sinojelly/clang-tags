@@ -32,8 +32,7 @@ public:
 	 *
 	 * @param tu  the TranslationUnit
 	 */
-	Cursor
-	    (const TranslationUnit &tu);
+	Cursor(const TranslationUnit &tu);
 
 	/** @brief Constructor from a source location
 	 *
@@ -48,9 +47,8 @@ public:
 	 * @param fileName  the file name of the source file in the translation unit
 	 * @param offset    the position in the file, expressed in characters since the file beginning
 	 */
-	Cursor
-	    (const TranslationUnit &tu,
-	    const std::string &fileName, const unsigned int offset);
+	Cursor(const TranslationUnit &tu,
+	       const std::string &fileName, const unsigned int offset);
 
 	/** @brief Determine whether the cursor is null
 	 *
@@ -59,8 +57,7 @@ public:
 	 *
 	 * @return true if the cursor is null
 	 */
-	bool isNull
-	    () const;
+	bool isNull() const;
 
 	/** @brief Determine whether the cursor is unexposed
 	 *
@@ -69,15 +66,13 @@ public:
 	 *
 	 * @return Determine whether the cursor is unexposed
 	 */
-	bool isUnexposed
-	    () const;
+	bool isUnexposed() const;
 
 	/** @brief Determine whether the cursor represents a declaration
 	 *
 	 * @return true if the cursor represents a declaration
 	 */
-	bool isDeclaration
-	    () const;
+	bool isDeclaration() const;
 
 	/** @brief Get the cursor referenced
 	 *
@@ -87,8 +82,7 @@ public:
 	 *
 	 * @return the referenced Cursor, null if no such cursor can be found
 	 */
-	Cursor referenced
-	    () const;
+	Cursor referenced() const;
 
 	/** @brief Get the kind of cursor
 	 *
@@ -100,15 +94,13 @@ public:
 	 *
 	 * @return the cursor kind, as a string
 	 */
-	std::string kindStr
-	    () const;
+	std::string kindStr() const;
 
 	/** @brief Get the name of the entity referred to
 	 *
 	 * @return the name of the referenced entity, as a string
 	 */
-	std::string spelling
-	    () const;
+	std::string spelling() const;
 
 	/** @brief Get the Unified Symbol Resolution for the entity referenced
 	 *
@@ -120,8 +112,7 @@ public:
 	 *
 	 * @return the USR, as a string
 	 */
-	std::string USR
-	    () const;
+	std::string USR() const;
 
 	/** @brief Get the source location associated to a cursor
 	 *
@@ -131,8 +122,7 @@ public:
 	 *
 	 * @return a SourceLocation to the beginning of the referenced entity
 	 */
-	SourceLocation location
-	    () const;
+	SourceLocation location() const;
 
 	/** @brief Get the source location associated to a cursor
 	 *
@@ -142,22 +132,18 @@ public:
 	 *
 	 * @return a SourceLocation to the end of the referenced entity
 	 */
-	SourceLocation end
-	    () const;
+	SourceLocation end() const;
 
 private:
-	Cursor
-	    (CXCursor raw);
-	const CXCursor &raw
-	    () const;
+	Cursor(CXCursor raw);
+	const CXCursor &raw() const;
 	CXCursor cursor_;
 
 	// Friend declaration
 	template <typename VISITOR>
-	friend CXChildVisitResult visitChildren
-	    (CXCursor rawCursor,
-	    CXCursor rawParent,                                              //unused
-	    CXClientData client_data);
+	friend CXChildVisitResult visitChildren(CXCursor rawCursor,
+	                                        CXCursor rawParent,              //unused
+	                                        CXClientData client_data);
 	template <typename VISITOR>
 	friend class Visitor;
 };

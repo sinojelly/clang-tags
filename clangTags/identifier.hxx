@@ -13,15 +13,15 @@ struct Identifier {
 	/** @brief Location of an identifier in the source code
 	 */
 	struct Reference {
-		std::string file;                       /**< @brief Source file path */
-		int line1;                              /**< @brief Line number of the identifier beginning */
-		int line2;                              /**< @brief Line number of the identifier end */
-		int col1;                               /**< @brief Column number of the identifier beginning */
-		int col2;                               /**< @brief Column number of the identifier end */
-		int offset1;                            /**< @brief Offset of the identifier beginning */
-		int offset2;                            /**< @brief Offset of the identifier end */
-		std::string kind;                       /**< @brief Symbol kind */
-		std::string spelling;                   /**< @brief Identifier name */
+		std::string file;                               /**< @brief Source file path */
+		int line1;                                      /**< @brief Line number of the identifier beginning */
+		int line2;                                      /**< @brief Line number of the identifier end */
+		int col1;                                       /**< @brief Column number of the identifier beginning */
+		int col2;                                       /**< @brief Column number of the identifier end */
+		int offset1;                                    /**< @brief Offset of the identifier beginning */
+		int offset2;                                    /**< @brief Offset of the identifier end */
+		std::string kind;                               /**< @brief Symbol kind */
+		std::string spelling;                           /**< @brief Identifier name */
 
 		/** @brief Serialize to a JSON object
 		 *
@@ -46,14 +46,14 @@ struct Identifier {
 	/** @brief Location of the definition of a symbol in the source code
 	 */
 	struct Definition {
-		std::string usr;                        /**< @brief Unified Symbol Resolution */
-		std::string file;                       /**< @brief Source file path */
-		int line1;                              /**< @brief Line number of the definition beginning */
-		int line2;                              /**< @brief Line number of the definition end */
-		int col1;                               /**< @brief Column number of the definition beginning */
-		int col2;                               /**< @brief Column number of the definition end */
-		std::string kind;                       /**< @brief Symbol kind */
-		std::string spelling;                   /**< @brief Symbol name */
+		std::string usr;                                /**< @brief Unified Symbol Resolution */
+		std::string file;                               /**< @brief Source file path */
+		int line1;                                      /**< @brief Line number of the definition beginning */
+		int line2;                                      /**< @brief Line number of the definition end */
+		int col1;                                       /**< @brief Column number of the definition beginning */
+		int col2;                                       /**< @brief Column number of the definition end */
+		std::string kind;                               /**< @brief Symbol kind */
+		std::string spelling;                           /**< @brief Symbol name */
 
 		/** @brief Serialize to a JSON object
 		 *
@@ -74,8 +74,8 @@ struct Identifier {
 		}
 	};
 
-	Reference ref;         /**< @brief Location of the identifier in the source code */
-	Definition def;         /**< @brief Location of the symbol definition */
+	Reference ref;             /**< @brief Location of the identifier in the source code */
+	Definition def;             /**< @brief Location of the symbol definition */
 
 	/** @brief Serialize to a JSON object
 	 *
