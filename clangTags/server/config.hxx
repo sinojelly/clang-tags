@@ -18,27 +18,31 @@ namespace Server {
  * This class provides a parser for the @c "config" command, which gets/sets
  * clang-tags options.
  */
-class Config : public Request::CommandParser {
+class Config : public Request::CommandParser
+{
 public:
-  /** @brief Constructor
-   *
-   * @param storage @ref Storage instance used to store options
-   */
-  Config (Storage & storage);
+	/** @brief Constructor
+	 *
+	 * @param storage @ref Storage instance used to store options
+	 */
+	Config
+	    (Storage &storage);
 
-  void defaults ();
+	void defaults
+	    ();
 
-  void run (std::ostream & cout);
+	void run
+	    (std::ostream &cout);
 
 private:
-  struct Args {
-    bool        get;
-    std::string name;
-    std::string value;
-  };
-  Args args_;
+	struct Args {
+		bool get;
+		std::string name;
+		std::string value;
+	};
+	Args args_;
 
-  Storage & storage_;
+	Storage &storage_;
 };
 /** @} */
 }

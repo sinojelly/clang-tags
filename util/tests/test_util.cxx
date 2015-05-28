@@ -5,64 +5,72 @@
 #include "util/util.hxx"
 #include <sstream>
 
-void check (bool expr) {
-  if (!expr) {
-    throw std::string ("Error");
-  }
+void check(bool expr)
+{
+	if (!expr)
+	{
+		throw std::string("Error");
+	}
 }
 
 
-void testTimer () {
-  //![Timer]
-  Timer timer;
+void testTimer()
+{
+	//![Timer]
+	Timer timer;
 
-  // do something
-  std::cout << "Testing Timer..." << std::endl;
+	// do something
+	std::cout << "Testing Timer..." << std::endl;
 
-  std::cout << "Elapsed time: " << timer.get() << " s." << std::endl;
-  //![Timer]
+	std::cout << "Elapsed time: " << timer.get() << " s." << std::endl;
+	//![Timer]
 }
 
 
-void testString () {
-  std::cout << "Testing String..." << std::endl;
+void testString()
+{
+	std::cout << "Testing String..." << std::endl;
 
-  // Usage example
-  //![String]
-  String s ("foobar");
+	// Usage example
+	//![String]
+	String s("foobar");
 
-  check (s.startsWith ("foo"));
-  //![String]
+	check(s.startsWith("foo"));
+	//![String]
 
 
-  // Additional tests
-  check (s.startsWith ("bar") == false);
+	// Additional tests
+	check(s.startsWith("bar") == false);
 }
 
 
-void testTee () {
-  std::cout << "Testing Tee" << std::endl;
+void testTee()
+{
+	std::cout << "Testing Tee" << std::endl;
 
-  //![Tee]
-  std::stringstream stream;
-  Tee tee (std::cout, stream);
-  tee << "foo" << std::endl;
+	//![Tee]
+	std::stringstream stream;
+	Tee tee(std::cout, stream);
+	tee << "foo" << std::endl;
 
-  std::cout << stream.str() << std::endl;
-  //![Tee]
+	std::cout << stream.str() << std::endl;
+	//![Tee]
 }
 
 
-int main () {
-  try {
-    testTimer();
-    testString();
-    testTee();
-  }
-  catch (...) {
-    std::cerr << "Caught exception!" << std::endl;
-    return 1;
-  }
+int main()
+{
+	try
+	{
+		testTimer();
+		testString();
+		testTee();
+	}
+	catch (...)
+	{
+		std::cerr << "Caught exception!" << std::endl;
+		return 1;
+	}
 
-  return 0;
+	return 0;
 }

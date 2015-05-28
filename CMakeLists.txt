@@ -226,7 +226,7 @@ ct_add_test (ct-find-def
   "cd build"
   "ct-find-def | tee output"
   "set -x"
-  "grep -q 'main.cxx:21-23' output"
+  "grep -q 'main.cxx:30-33' output"
   "grep -q 'c:@S@MyClass>#I@F@display#' output"
 )
 set_tests_properties (ct-find-def PROPERTIES DEPENDS ct-index)
@@ -235,6 +235,6 @@ ct_add_test (ct-grep
   "cd build"
   "ct-grep | tee output"
   "set -x"
-  "grep -q 'main.cxx:33' output"
+  "grep -q 'main.cxx:44' output"
 )
 set_tests_properties (ct-grep PROPERTIES DEPENDS ct-index)

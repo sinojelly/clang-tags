@@ -14,25 +14,29 @@ namespace Server {
  * This class provides a parser for the @c "grep" command, which looks in the
  * project's sources for all references to a given symbol.
  */
-class Grep : public Request::CommandParser {
+class Grep : public Request::CommandParser
+{
 public:
-  /** @brief Constructor
-   *
-   * @param storage @ref Storage instance where to look for indexed tags
-   */
-  Grep (Storage & storage);
+	/** @brief Constructor
+	 *
+	 * @param storage @ref Storage instance where to look for indexed tags
+	 */
+	Grep
+	    (Storage &storage);
 
-  void defaults ();
+	void defaults
+	    ();
 
-  void run (std::ostream & cout);
+	void run
+	    (std::ostream &cout);
 
 private:
-  struct Args {
-    std::string usr;
-  };
-  Args args_;
+	struct Args {
+		std::string usr;
+	};
+	Args args_;
 
-  Storage & storage_;
+	Storage &storage_;
 };
 /** @} */
 }

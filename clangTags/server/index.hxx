@@ -16,18 +16,21 @@ namespace Server {
  * Indexer to update the source files index, and wait for the reindexing to
  * terminate.
  */
-class Index : public Request::CommandParser {
+class Index : public Request::CommandParser
+{
 public:
-  /** @brief Constructor
-   *
-   * @param indexer  @ref Indexer instance to use
-   */
-  Index (Indexer::Indexer & indexer);
+	/** @brief Constructor
+	 *
+	 * @param indexer  @ref Indexer instance to use
+	 */
+	Index
+	    (Indexer::Indexer &indexer);
 
-  void run (std::ostream & cout);
+	void run
+	    (std::ostream &cout);
 
 private:
-  Indexer::Indexer & indexer_;
+	Indexer::Indexer &indexer_;
 };
 /** @} */
 }

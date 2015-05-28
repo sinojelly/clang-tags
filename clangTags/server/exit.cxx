@@ -3,13 +3,15 @@
 
 namespace ClangTags {
 namespace Server {
-Exit::Exit ()
-  : Request::CommandParser ("exit", "Shutdown server")
-{}
+Exit::Exit()
+	: Request::CommandParser("exit", "Shutdown server")
+{
+}
 
-void Exit::run (std::ostream & cout) {
-  cout << "Exiting..." << std::endl;
-  throw std::runtime_error ("shutdown requested");
+void Exit::run(std::ostream &cout)
+{
+	cout << "Exiting..." << std::endl;
+	throw std::runtime_error("shutdown requested");
 }
 }
 }

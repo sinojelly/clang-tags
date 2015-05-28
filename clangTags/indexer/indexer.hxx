@@ -18,59 +18,67 @@ namespace Indexer {
  * This class implements the @c callable concept, and is destined to be invoked
  * in a separate thread of execution.
  */
-class Indexer {
+class Indexer
+{
 public:
 
-  /** @brief Constructor
-   *
-   * This object accesses the database using its own @ref Storage instance.
-   *
-   * @ref Indexer objects are constructed with an initial index update already
-   * scheduled (see index()).
-   */
-  Indexer ();
+	/** @brief Constructor
+	 *
+	 * This object accesses the database using its own @ref Storage instance.
+	 *
+	 * @ref Indexer objects are constructed with an initial index update already
+	 * scheduled (see index()).
+	 */
+	Indexer
+	    ();
 
-  /** @brief Main loop
-   *
-   * This is the main loop executed by the thread. It watches for requests
-   * coming from other threads (see index()), and updates the source files
-   * index (see Update)
-   */
-  void operator() ();
+	/** @brief Main loop
+	 *
+	 * This is the main loop executed by the thread. It watches for requests
+	 * coming from other threads (see index()), and updates the source files
+	 * index (see Update)
+	 */
+	void operator()
+	    ();
 
-  /** @brief Schedule an index update
-   *
-   * Calling this method asks the Indexer to update the source files index.
-   */
-  void index ();
+	/** @brief Schedule an index update
+	 *
+	 * Calling this method asks the Indexer to update the source files index.
+	 */
+	void index
+	    ();
 
-  void exit ();
+	void exit
+	    ();
 
-  /** @brief Wait until the index is updated
-   *
-   * Upon calling this method, the calling thread is put to sleep until the
-   * source files index has been updated.
-   */
-  void wait ();
+	/** @brief Wait until the index is updated
+	 *
+	 * Upon calling this method, the calling thread is put to sleep until the
+	 * source files index has been updated.
+	 */
+	void wait
+	    ();
 
-  /** @brief Register a watcher instance
-   *
-   * After the index has been updated, if a @ref Watcher::Watcher "Watcher"
-   * instance has been registered, it is notified to update its watch list.
-   *
-   * @param watcher  pointer to a @ref Watcher::Watcher "Watcher" instance
-   */
-  void setWatcher (Watcher::Watcher * watcher);
+	/** @brief Register a watcher instance
+	 *
+	 * After the index has been updated, if a @ref Watcher::Watcher "Watcher"
+	 * instance has been registered, it is notified to update its watch list.
+	 *
+	 * @param watcher  pointer to a @ref Watcher::Watcher "Watcher" instance
+	 */
+	void setWatcher
+	    (Watcher::Watcher * watcher);
 
 private:
-  void updateIndex_();
+	void updateIndex_
+	    ();
 
-  Storage storage_;
-  Update update_;
-  MT::SFlag<bool> indexRequested_;
-  MT::SFlag<bool> indexUpdated_;
-  Watcher::Watcher * watcher_;
-  std::atomic_bool exitRequested_;
+	Storage storage_;
+	Update update_;
+	MT::SFlag<bool> indexRequested_;
+	MT::SFlag<bool> indexUpdated_;
+	Watcher::Watcher * watcher_;
+	std::atomic_bool exitRequested_;
 };
 /** @} */
 }

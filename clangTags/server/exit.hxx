@@ -13,13 +13,16 @@ namespace Server {
  * This class provides a parser for the @c "exit" command, which asks the server
  * to terminate.
  */
-class Exit : public Request::CommandParser {
+class Exit : public Request::CommandParser
+{
 public:
-  /** @brief Constructor
-   */
-  Exit ();
+	/** @brief Constructor
+	 */
+	Exit
+	    ();
 
-  void run (std::ostream & cout);
+	void run
+	    (std::ostream &cout);
 };
 /** @} */
 }

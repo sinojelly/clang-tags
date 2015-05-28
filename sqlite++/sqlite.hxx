@@ -5,8 +5,8 @@
 
 /** @addtogroup sqlite Sqlite++
 
-@brief Wrapper around the SQLite C API
+   @brief Wrapper around the SQLite C API
 
-Here is a brief example:
-@snippet test_sqlite++.cxx main
-*/
+   Here is a brief example:
+   @snippet test_sqlite++.cxx main
+ */
