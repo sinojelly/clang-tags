@@ -84,7 +84,8 @@ public:
 		                  "WHERE includes.includedId = ?")
 		      .bind(fileId);
 
-		switch (stmt.step()) {
+		switch (stmt.step())
+		{
 		case SQLITE_DONE:
 			throw std::runtime_error("no compilation command for file `"
 			                         + fileName + "'");

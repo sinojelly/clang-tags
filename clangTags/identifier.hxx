@@ -75,7 +75,7 @@ struct Identifier {
 	};
 
 	Reference ref;             /**< @brief Location of the identifier in the source code */
-	Definition def;             /**< @brief Location of the symbol definition */
+	Definition def;            /**< @brief Location of the symbol definition */
 
 	/** @brief Serialize to a JSON object
 	 *

@@ -91,7 +91,8 @@ void Inotify::operator()()
 		}
 
 		// Look for an inotify event
-		switch (poll(&fd, 1, 1000)) {
+		switch (poll(&fd, 1, 1000))
+		{
 		case -1:
 			perror("poll");
 			break;
