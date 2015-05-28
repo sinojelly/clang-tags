@@ -30,10 +30,10 @@ public:
 	 * - a (line, column) pair
 	 */
 	struct Position {
-		std::string file;                               /**< @brief file name */
-		unsigned int line;                              /**< @brief line number */
-		unsigned int column;                            /**< @brief column number */
-		unsigned int offset;                            /**< @brief offset in characters since the file beginning */
+		std::string file;               /**< @brief file name */
+		unsigned int line;              /**< @brief line number */
+		unsigned int column;            /**< @brief column number */
+		unsigned int offset;            /**< @brief offset in characters since the file beginning */
 	};
 
 	/** @brief Equality operator

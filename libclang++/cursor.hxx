@@ -142,7 +142,7 @@ private:
 	// Friend declaration
 	template <typename VISITOR>
 	friend CXChildVisitResult visitChildren(CXCursor rawCursor,
-	                                        CXCursor rawParent,              //unused
+	                                        CXCursor rawParent,  //unused
 	                                        CXClientData client_data);
 	template <typename VISITOR>
 	friend class Visitor;
