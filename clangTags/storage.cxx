@@ -548,3 +548,6 @@ Sqlite::Transaction Storage::beginTransaction()
 	return impl_->beginTransaction();
 }
 }
+
+// vim: set noet ts=4 sw=4:
+// dbext:type=SQLITE:dbname=.ct.sqlite

@@ -7,7 +7,6 @@
 #include "clangTags/storage.hxx"
 
 #include <atomic>
-#include <unordered_set>
 
 namespace ClangTags {
 namespace Watcher {
@@ -62,7 +61,6 @@ private:
 
 	Storage storage_;
 	int fd_inotify_;
-	std::unordered_set<std::string> watchedFiles_;
 	std::atomic_bool updateRequested_;
 	std::atomic_bool exitRequested_;
 };

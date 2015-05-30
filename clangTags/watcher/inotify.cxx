@@ -46,20 +46,12 @@ void Inotify::update_()
 	for (const auto &fileName : storage_.listFiles())
 	{
 
-		// Skip already watched files
-		if (watchedFiles_.count(fileName))
-		{
-			continue;
-		}
-
 		std::cerr << "Watching " << fileName << std::endl;
 		int wd = inotify_add_watch(fd_inotify_, fileName.c_str(), IN_MODIFY);
 		if (wd == -1)
 		{
 			perror("inotify_add_watch");
 		}
-
-		watchedFiles_.insert(fileName);
 	}
 }
 
