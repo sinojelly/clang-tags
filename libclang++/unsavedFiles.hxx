@@ -22,7 +22,7 @@ public:
 	 * @param sourcePath  path to the source file
 	 * @param bufferPath  path to the up-to-date contents
 	 */
-	void add(const std::string sourcePath, const std::string bufferPath)
+	void add(const std::string &sourcePath, const std::string &bufferPath)
 	{
 		const int bufsize = 4096;
 		char *buf = new char[bufsize];

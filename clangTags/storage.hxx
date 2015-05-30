@@ -181,7 +181,7 @@ public:
 	 *
 	 * @return vector of @ref Identifier "identifiers"
 	 */
-	std::vector<ClangTags::Identifier> findDefinition(const std::string fileName,
+	std::vector<ClangTags::Identifier> findDefinition(const std::string &fileName,
 	                                                  int offset);
 
 	/** @brief Retrieve all source location referring to a given symbol
@@ -190,7 +190,7 @@ public:
 	 *
 	 * @return vector of @ref Identifier::Reference "symbol references"
 	 */
-	std::vector<ClangTags::Identifier::Reference> grep(const std::string usr);
+	std::vector<ClangTags::Identifier::Reference> grep(const std::string &usr);
 
 	/** @} */
 

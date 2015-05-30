@@ -215,7 +215,7 @@ public:
 		.step();
 	}
 
-	std::vector<ClangTags::Identifier> findDefinition(const std::string fileName,
+	std::vector<ClangTags::Identifier> findDefinition(const std::string &fileName,
 	                                                  int offset)
 	{
 		int fileId = fileId_(fileName);
@@ -253,7 +253,7 @@ public:
 		return ret;
 	}
 
-	std::vector<ClangTags::Identifier::Reference> grep(const std::string usr)
+	std::vector<ClangTags::Identifier::Reference> grep(const std::string &usr)
 	{
 		Sqlite::Statement stmt =
 		    db_.prepare("SELECT ref.line1, ref.line2, ref.col1, ref.col2, "
@@ -506,14 +506,14 @@ void Storage::addTag(const std::string &usr,
 }
 
 
-std::vector<ClangTags::Identifier> Storage::findDefinition(const std::string fileName,
+std::vector<ClangTags::Identifier> Storage::findDefinition(const std::string &fileName,
                                                            int offset)
 {
 	return impl_->findDefinition(fileName,
 	                             offset);
 }
 
-std::vector<ClangTags::Identifier::Reference> Storage::grep(const std::string usr)
+std::vector<ClangTags::Identifier::Reference> Storage::grep(const std::string &usr)
 {
 	return impl_->grep(usr);
 }
