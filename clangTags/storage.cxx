@@ -81,8 +81,8 @@ public:
 		    = db_.prepare("SELECT commands.directory, commands.args "
 		                  "FROM includes "
 		                  "INNER JOIN commands ON includes.sourceId = commands.fileId "
-		                  "WHERE includes.includedId = ?")
-		      .bind(fileId);
+		                  "WHERE includes.includedId = ?");
+		stmt.bind(fileId);
 
 		switch (stmt.step())
 		{
@@ -154,8 +154,8 @@ public:
 		int indexed;
 		{
 			Sqlite::Statement stmt
-			    = db_.prepare("SELECT indexed FROM files WHERE id = ?")
-			      .bind(fileId);
+			    = db_.prepare("SELECT indexed FROM files WHERE id = ?");
+			stmt.bind(fileId);
 			stmt.step();
 			stmt >> indexed;
 		}
@@ -231,8 +231,8 @@ public:
 		                "  AND ref.fileId = ?  "
 		                "  AND ref.offset1 <= ? "
 		                "  AND ref.offset2 >= ? "
-		                "ORDER BY (ref.offset2 - ref.offset1)")
-		    .bind(fileId)
+		                "ORDER BY (ref.offset2 - ref.offset1)");
+		stmt.bind(fileId)
 		    .bind(offset)
 		    .bind(offset);
 
@@ -260,8 +260,8 @@ public:
 		                "       ref.offset1, ref.offset2, refFile.name, ref.kind "
 		                "FROM tags AS ref "
 		                "INNER JOIN files AS refFile ON ref.fileId = refFile.id "
-		                "WHERE ref.usr = ?")
-		    .bind(usr);
+		                "WHERE ref.usr = ?");
+		stmt.bind(usr);
 
 		std::vector<ClangTags::Identifier::Reference> ret;
 		while (stmt.step() == SQLITE_ROW)
@@ -306,8 +306,8 @@ public:
 	{
 		Sqlite::Statement stmt =
 		    db_.prepare("SELECT value FROM options "
-		                "WHERE name = ?")
-		    .bind(name);
+		                "WHERE name = ?");
+		stmt.bind(name);
 
 		if (stmt.step() == SQLITE_ROW)
 		{
@@ -335,8 +335,8 @@ private:
 	int fileId_(const std::string &fileName)
 	{
 		Sqlite::Statement stmt
-		    = db_.prepare("SELECT id FROM files WHERE name=?")
-		      .bind(fileName);
+		    = db_.prepare("SELECT id FROM files WHERE name=?");
+		stmt.bind(fileName);
 
 		int id = -1;
 		if (stmt.step() == SQLITE_ROW)

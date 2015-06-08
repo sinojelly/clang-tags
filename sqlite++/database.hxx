@@ -104,7 +104,7 @@ private:
 			sqlite3_close(db_);
 		}
 	};
-	std::shared_ptr<Sqlite3_> db_;
+	std::unique_ptr<Sqlite3_> db_;
 
 	friend class Statement;
 };

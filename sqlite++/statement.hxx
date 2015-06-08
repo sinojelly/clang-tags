@@ -190,7 +190,7 @@ private:
 	Database &db_;
 	int bindI_;
 	int colI_;
-	std::shared_ptr<Statement_> stmt_;
+	std::unique_ptr<Statement_> stmt_;
 };
 
 /** @} */

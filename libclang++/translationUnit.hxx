@@ -107,7 +107,7 @@ private:
 			clang_disposeTranslationUnit(translationUnit_);
 		}
 	};
-	std::shared_ptr<TranslationUnit_> translationUnit_;
+	std::unique_ptr<TranslationUnit_> translationUnit_;
 
 	// Friend declaration
 	friend class Index;

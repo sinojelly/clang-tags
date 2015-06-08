@@ -60,7 +60,7 @@ private:
 		}
 	};
 
-	std::shared_ptr<Index_> index_;
+	std::unique_ptr<Index_> index_;
 };
 
 /** @} */
