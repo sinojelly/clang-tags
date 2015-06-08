@@ -24,7 +24,7 @@ include_directories (${CMAKE_SOURCE_DIR})
 # Check for Boost (system + asio)
 find_package (Boost
   REQUIRED
-  COMPONENTS system
+  COMPONENTS system program_options
 )
 include_directories (${Boost_INCLUDE_DIRS})
 link_directories (${Boost_LIBRARY_DIRS})
@@ -95,7 +95,6 @@ include_directories ("${PROJECT_BINARY_DIR}")
 
 include ("sqlite++/CMakeLists.txt")
 include ("libclang++/CMakeLists.txt")
-include ("getopt++/CMakeLists.txt")
 include ("request/CMakeLists.txt")
 include ("util/CMakeLists.txt")
 

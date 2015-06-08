@@ -1,6 +1,6 @@
 #include "config.h"
 
-#include "getopt++/getopt.hxx"
+#include <boost/program_options.hpp>
 
 #include "clangTags/indexer/indexer.hxx"
 #include "clangTags/watcher/inotify.hxx"
@@ -10,29 +10,40 @@
 
 int main(int argc, char **argv)
 {
-	Getopt options(argc, argv);
-	options.add("help", 'h', 0,
-	            "print this help message and exit");
-	options.add("stdin", 's', 0,
-	            "read a request from the standard input and exit");
+	namespace po = boost::program_options;
+
+	struct winsize w;
+	ioctl(0, TIOCGWINSZ, &w);
+	int line_length = w.ws_col;
+
+	po::options_description desc("Options", line_length, line_length / 2);
+	desc.add_options()
+		("help,h", "print this help message and exit")
+		("stdin,s", "read a request from the standard input and exit")
+		;
+
+	po::variables_map vm;
 
 	try
 	{
-		options.get();
+		po::store(po::command_line_parser(argc, argv)
+					.options(desc)
+					.run(),
+				  vm);
 	}
 	catch (...)
 	{
-		std::cerr << options.usage();
+		std::cerr << desc;
 		return 1;
 	}
 
-	if (options.getCount("help") > 0)
+	if (vm.count("help"))
 	{
-		std::cerr << options.usage();
+		std::cerr << desc;
 		return 0;
 	}
 
-	const bool fromStdin = options.getCount("stdin") > 0;
+	const bool fromStdin = vm.count("stdin") > 0;
 
 	ClangTags::Indexer::Indexer indexer;
 
