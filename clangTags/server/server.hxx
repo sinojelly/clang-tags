@@ -7,7 +7,7 @@
 #include "clangTags/server/grep.hxx"
 #include "clangTags/server/exit.hxx"
 
-#define BOOST_ASIO_DISABLE_EPOLL
+//#define BOOST_ASIO_DISABLE_EPOLL
 #include <boost/asio.hpp>
 
 namespace ClangTags {
