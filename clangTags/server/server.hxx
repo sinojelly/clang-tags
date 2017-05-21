@@ -7,6 +7,7 @@
 #include "clangTags/server/grep.hxx"
 #include "clangTags/server/exit.hxx"
 
+#define BOOST_ASIO_DISABLE_EPOLL
 #include <boost/asio.hpp>
 
 namespace ClangTags {
@@ -88,7 +89,7 @@ public:
 
 				boost::asio::io_service io_service;
 				boost::asio::local::stream_protocol::endpoint endpoint(socketPath_);
-				boost::asio::local::stream_protocol::acceptor acceptor(io_service, endpoint);
+				boost::asio::local::stream_protocol::acceptor acceptor(io_service, endpoint); // throw exception on windows 10 bash here, bind: Operation not permitted
 				for (;; )
 				{
 					boost::asio::local::stream_protocol::iostream socket;
@@ -100,8 +101,9 @@ public:
 					}
 				}
 			}
-			catch (...)
+		    catch (std::exception& e)
 			{
+				std::cerr << std::endl << "Caught exception: " << e.what() << std::endl;
 			}
 		}
 	}

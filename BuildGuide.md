@@ -22,9 +22,8 @@ As an example, here is an installation procedure which has been tested on a fres
 ```
 # Install dependencies
 su -c "apt-get install build-essential git cmake pkg-config \
-                       libboost-system-dev libjsoncpp-dev   \
-                       libclang-dev libsqlite3-dev socat    \
-                       strace emacs"
+                       libboost-system-dev libboost-program-options-dev libjsoncpp-dev   \
+                       libclang-dev libsqlite3-dev"
 
 # Get clang-tags sources
 mkdir clang-tags && cd clang-tags
@@ -34,7 +33,8 @@ git clone https://github.com/ffevotte/clang-tags.git src
 mkdir build && cd build
 
 # Configure the project
-cmake ../src
+cmake    -DLIBCLANG_ROOT=/usr/lib/llvm-3.8 -DBOOST_ROOT=/usr/include/boost  -DCMAKE_BUILD_TYPE=Release  ../clang-tags
+notes: replace the path with yours.
 
 # Build and run tests
 make

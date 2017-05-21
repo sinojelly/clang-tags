@@ -20,7 +20,6 @@ endif ("${CMAKE_BUILD_TYPE}" STREQUAL Release)
 
 include_directories (${CMAKE_SOURCE_DIR})
 
-
 # Check for Boost (system + asio)
 find_package (Boost
   REQUIRED
@@ -57,7 +56,7 @@ set(LIBS ${LIBS} ${Libsqlite3_LIBRARIES})
 
 
 # Check for strace
-find_package (Strace REQUIRED)
+find_package (Strace)
 
 
 # Check for python
